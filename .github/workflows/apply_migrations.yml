@@ -4,10 +4,10 @@ on:
   push:
     branches: [ main ]
 jobs:
-  apply_migrations:
+  apply-migration:
     runs-on: ubuntu-latest
     env:
-      supabase_db_url: ${{ secrets.SUPABASE_DB_URL }}   # For example: postgresql://postgres:[YOUR-PASSWORD]@db.<ref>.supabase.co:5432/postgres
+      supabase_db_url: ${{ secrets.SUPABASE_DB_URL }}
     steps:
       - uses: actions/checkout@v3
         with:
