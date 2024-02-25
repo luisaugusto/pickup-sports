@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pickup Sports
 
-## Getting Started
+This is an open source application for finding nearby pickup games for your favorite sports, as well as for creating groups and hosting your own games.
 
-First, run the development server:
+## Getting Started with Local Development
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Setting Up Supabase
+
+> Running Supabase locally requires the installation of [Docker Desktop](https://docs.docker.com/desktop)
+
+1. Run `npx supabase start` to install the Docker images and containers for the project
+2. Once the project is running, it will output a list of URLs and keys for your local environment. Create a `.env.local` using `.env.example`, then set the `NEXT_PUBLIC_SUPABASE_URL` to the API Url, and `NEXT_PUBLIC_SUPABASE_ANON_KEY` to the Anon Key from your local environment
+3. Run `npm run supabase-types` to generate a types file for your local database
+4. When you are done with local development, you can run `npx supabase db stop` to stop all Supabase Docker containers currently running.
+
+You can learn more about Supabase from their [documentation](https://supabase.com/docs)
+
+#### Supabase Migrations
+
+If you need to make changes to the database, you can do so in the local Supabase studio and then create a migration with `npx supabase diff -f <migration_name>`. This will create a file in `./supabase/migrations`, which will be deployed to production when merged into the main branch.
+
+If there are new migrations in the repo, you can apply them to your local database with `npx supabase migration up`
+
+### Running Client
+
+1. Install packages locally with `npm i`
+2. Start the development server with `npm run dev`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+You can learn more about NextJS from their [documentation](https://nextjs.org/docs)

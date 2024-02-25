@@ -1,0 +1,1 @@
+create table profile (id INT PRIMARY KEY UNIQUE )
