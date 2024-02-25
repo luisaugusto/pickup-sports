@@ -1,0 +1,19 @@
+name: Apply Migrations
+
+on:
+  push:
+    branches: [ main ]
+jobs:
+  apply_migrations:
+    runs-on: ubuntu-latest
+    env:
+      supabase_db_url: ${{ secrets.SUPABASE_DB_URL }}   # For example: postgresql://postgres:[YOUR-PASSWORD]@db.<ref>.supabase.co:5432/postgres
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Apply Migrations
+        run: supabase db push --db-url "$supabase_db_url"
