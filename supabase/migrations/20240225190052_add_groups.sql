@@ -4,9 +4,7 @@ create table "public"."groups" (
 );
 
 
-alter table "public"."groups" enable row level security;
-
-alter table "public"."profile" add column "created_at" timestamp with time zone not null;
+alter table "public"."profile" add column "created_at" timestamp with time zone not null default now();
 
 alter table "public"."profile" alter column "id" set data type bigint using "id"::bigint;
 
