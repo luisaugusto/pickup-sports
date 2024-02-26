@@ -1,4 +1,3 @@
-import styles from "./page.module.css";
 import AuthForm from "@/app/AuthForm";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/supabase";
@@ -10,7 +9,7 @@ export default async function Home() {
     data: { user },
   } = await supabase.auth.getUser();
   return (
-    <main className={styles.main}>
+    <main>
       <AuthForm user={user} />
     </main>
   );
