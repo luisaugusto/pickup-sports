@@ -22,7 +22,7 @@ export default function AuthForm({ user }: { user: User | null }) {
     }, 100);
   }, [queueRefresh, router]);
 
-  supabase.auth.onAuthStateChange((event, session) => {
+  supabase.auth.onAuthStateChange((event) => {
     if (["SIGNED_IN", "SIGNED_OUT"].includes(event)) setQueueRefresh(true);
   });
   const signOut = async () => {
