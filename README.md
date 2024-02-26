@@ -9,7 +9,7 @@ This is an open source application for finding nearby pickup games for your favo
 > Running Supabase locally requires the installation of [Docker Desktop](https://docs.docker.com/desktop)
 
 1. Run `npx supabase start` to install the Docker images and containers for the project
-2. Once the project is running, it will output a list of URLs and keys for your local environment. Create a `.env.local` using `.env.example`, then set the `NEXT_PUBLIC_SUPABASE_URL` to the API Url, and `NEXT_PUBLIC_SUPABASE_ANON_KEY` to the Anon Key from your local environment
+2. Once the project is running, it will output a list of URLs and keys for your local environment. Create a `.env` using `.env.example`, then set the `NEXT_PUBLIC_SUPABASE_URL` to the API Url, and `NEXT_PUBLIC_SUPABASE_ANON_KEY` to the Anon Key from your local environment
 3. Run `npm run supabase-types` to generate a types file for your local database
 4. When you are done with local development, you can run `npx supabase db stop` to stop all Supabase Docker containers currently running.
 

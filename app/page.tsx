@@ -6,23 +6,12 @@ import { cookies } from "next/headers";
 
 export default async function Home() {
   const supabase = createServerComponentClient<Database>({ cookies });
-
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  console.log(user);
   return (
     <main className={styles.main}>
-      {user ? (
-        <form action="/auth/signout" method="post">
-          <button className="button block" type="submit">
-            Sign out
-          </button>
-        </form>
-      ) : (
-        <AuthForm />
-      )}
+      <AuthForm user={user} />
     </main>
   );
 }

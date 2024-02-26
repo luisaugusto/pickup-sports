@@ -1,33 +1,46 @@
 "use client";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import {
+  createClientComponentClient,
+  User,
+} from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/supabase";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default function AuthForm() {
+export default function AuthForm({ user }: { user: User | null }) {
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
-  supabase.auth.onAuthStateChange((event) => {
-    if (event === "SIGNED_IN" || event === "SIGNED_OUT") {
-      router.refresh();
-    }
-  });
+  const [queueRefresh, setQueueRefresh] = useState(false);
 
-  return (
-    <div>
-      <Auth
-        supabaseClient={supabase}
-        view="sign_in"
-        theme="dark"
-        appearance={{ theme: ThemeSupa }}
-      />
-      <Auth
-        supabaseClient={supabase}
-        view="sign_up"
-        theme="dark"
-        appearance={{ theme: ThemeSupa }}
-      />
-    </div>
+  useEffect(() => {
+    if (!queueRefresh) return;
+    setTimeout(() => {
+      setQueueRefresh(false);
+      router.refresh();
+    }, 100);
+  }, [queueRefresh, router]);
+
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (["SIGNED_IN", "SIGNED_OUT"].includes(event)) setQueueRefresh(true);
+  });
+  const signOut = async () => {
+    await supabase.auth.signOut({ scope: "global" });
+  };
+
+  return user ? (
+    <button className="button block" onClick={signOut}>
+      Sign out
+    </button>
+  ) : (
+    <Auth
+      supabaseClient={supabase}
+      view="sign_in"
+      theme="dark"
+      appearance={{ theme: ThemeSupa }}
+      providers={["google"]}
+      onlyThirdPartyProviders
+    />
   );
 }
