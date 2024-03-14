@@ -11,6 +11,12 @@ jobs:
       supabase_db_url: ${{ secrets.SUPABASE_DB_URL }}
     steps:
       - uses: actions/checkout@v4
+      - uses: aarcangeli/load-dotenv@v1.0.0
+        with:
+            path: ''
+            filenames: |
+              .env.example
+            quiet: false
       - uses: supabase/setup-cli@v1
         with:
           version: latest
